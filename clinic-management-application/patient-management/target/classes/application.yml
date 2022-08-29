@@ -1,0 +1,18 @@
+server:
+ port: 8180
+
+spring:
+ application:
+    name: patient-service
+ datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: ${DB_PASSWORD:shubh123456}
+    url: ${JDBC_URL:jdbc:mariadb://localhost:3306/training}
+    username: ${DB_USER:root}
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone:  ${EUREKA_SERVER:http://localhost:9190/eureka/}
+debug: true 

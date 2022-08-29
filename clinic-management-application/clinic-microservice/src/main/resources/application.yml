@@ -1,0 +1,38 @@
+server:
+ port: 8280
+
+spring:
+ application:
+    name: clinic-application
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone:  ${EUREKA_SERVER:http://localhost:9190/eureka/}
+debug: true 
+
+logging:
+  level: 
+    root: INFO
+    '[com.demo.spring.rest]':  INFO
+    '[com.demo]':  INFO
+  file:
+   name: logs/application-info.log  
+   
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  
+
+resilience4j.circuitbreaker:
+    instances:
+      demo:
+        failure-rate-threshold: 80
+        sliding-window-size: 10
+        sliding-window-type: COUNT_BASED
+        minimum-number-of-calls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        permitted-number-of-calls-in-half-open-state: 4
+        wait-duration-in-open-state: 1s    
